@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
+const db = require('./database/mongoConnection.js');
 
 app.use(express.static('dist'));
 
