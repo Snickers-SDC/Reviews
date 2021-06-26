@@ -3,36 +3,45 @@ CREATE DATABASE Sdc;
 USE Sdc;
 
 CREATE TABLE reviews (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  product_id INT,
-  rating INT,
-  date DATETIME(4),
-  summary VARCHAR(50),
-  body VARCHAR(1000),
-  recommended VARCHAR(5),
-  reported VARCHAR(5),
-  reviewer_name VARCHAR(75),
-  reviewer_email VARCHAR(75),
-  response VARCHAR(500),
-  helpfulness INT
+  review_id INTEGER NOT NULL PRIMARY KEY,
+  product_id INTEGER NOT NUll,
+  rating SMALLINT NOT NULL,
+  date BIGINT NOT NULL,
+  summary VARCHAR(150),
+  body VARCHAR(1000) NOT NULL,
+  recommended BOOLEAN NOT NULL,
+  reported BOOLEAN DEFAULT false,
+  reviewer_name VARCHAR(40) NOT NULL,
+  reviewer_email VARCHAR(50) NOT NULL,
+  response VARCHAR(150),
+  helpfulness SMALLINT DEFAULT 0
 );
 
 CREATE TABLE photos (
-  id INT,
-  review_id INT,
-  url VARCHAR(300)
-  -- FOREIGN KEY (reviewId) REFERENCES reviews (review_id)
+  id INTEGER NOT NULL PRIMARY KEY,
+  review_id INTEGER NOT NULL REFERENCES reviews(review_id),
+  url VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE reviewCharacteristic (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  characteristic_id INT,
-  review_id INT,
-  _value INT
+  id INTEGER NOT NULL PRIMARY KEY,
+  characteristic_id INTEGER NOT NULL REFERENCES characteristics(characteristic_id),
+  review_id INTEGER NOT NULL REFERENCES reviews(review_id),
+  value SMALLINT NOT NULL
 );
 
 CREATE TABLE characteristics (
-  id INT,
-  product_id INT,
-  name VARCHAR(10)
+  characteristic_id INTEGER NOT NULL PRIMARY KEY,
+  product_id INTEGER NOT NULL,
+  name VARCHAR(10) NOT NULL
 );
+
+
+/*
+COPY [table_name] FROM '/home/imaycode/hackreactor/senior-phase/Reviews/[file_name].csv' DELIMITER ',' CSV HEADER;
+\copy characteristics FROM '/Users/jacobward/Downloads/characteristics.csv' DELIMITER ',' CSV HEADER;
+\copy characteristic_reviews FROM '/Users/jacobward/Downloads/characteristic_reviews.csv' DELIMITER ',' CSV HEADER;
+\copy reviews FROM '/Users/jacobward/Downloads/reviews.csv' DELIMITER ',' CSV HEADER;
+\copy photos FROM '/Users/jacobward/Downloads/reviews_photos.csv' DELIMITER ',' CSV HEADER;
+
+*/
