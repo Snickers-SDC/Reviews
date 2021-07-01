@@ -1,0 +1,16 @@
+config:
+  target: 'http://localhost:3000/reviews/meta'
+  phases:
+  - duration: 30 # duration is in seconds
+    arrivalRate: 10 # per second
+    name: getting_reviews # just a name
+
+scenarios:
+  - name:
+    flow:
+      - get:
+          url: '/?id=123455'
+      - get:
+          url: '/?id=143215'
+      - get:
+          url: '/?id=1000000'

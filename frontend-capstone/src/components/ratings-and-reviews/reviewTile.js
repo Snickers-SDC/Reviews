@@ -109,7 +109,7 @@ class ReviewTile extends React.Component {
                 </>
               ) : null}
             </p>
-            {this.props.review.response === null ? null : (
+            {this.props.review.response === 'null' ? null : (
               <p className="review-response">
                 Response from seller: {this.props.review.response}
               </p>

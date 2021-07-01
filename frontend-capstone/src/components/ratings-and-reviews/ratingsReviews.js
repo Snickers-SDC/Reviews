@@ -20,7 +20,7 @@ class RatingsReviews extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.currentProductID !== this.props.currentProductID) {
       apiMaster
-        .getReviewsOfProduct(this.props.currentProductID, 20)
+        .getReviewsOfProduct(this.props.currentProductID, undefined, 20)
         .then(({ data }) => {
           let ratings = this.getRatings(data.results);
           let recommend = this.getRecommendation(data.results);
