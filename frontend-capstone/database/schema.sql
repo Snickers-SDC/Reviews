@@ -14,7 +14,9 @@ CREATE TABLE reviews (
   reviewer_name VARCHAR(40) NOT NULL,
   reviewer_email VARCHAR(50) NOT NULL,
   response VARCHAR(150),
-  helpfulness SMALLINT DEFAULT 0
+  helpfulness SMALLINT DEFAULT 0,
+  -- photo_id INTEGER NOT NULL PRIMARY KEY,
+  -- url VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE photos (
@@ -23,7 +25,7 @@ CREATE TABLE photos (
   url VARCHAR(250) NOT NULL
 );
 
-CREATE TABLE reviewCharacteristic (
+CREATE TABLE characteristic_reviews (
   id INTEGER NOT NULL PRIMARY KEY,
   characteristic_id INTEGER NOT NULL REFERENCES characteristics(characteristic_id),
   review_id INTEGER NOT NULL REFERENCES reviews(review_id),
@@ -43,5 +45,4 @@ COPY [table_name] FROM '/home/imaycode/hackreactor/senior-phase/Reviews/[file_na
 \copy characteristic_reviews FROM '/Users/jacobward/Downloads/characteristic_reviews.csv' DELIMITER ',' CSV HEADER;
 \copy reviews FROM '/Users/jacobward/Downloads/reviews.csv' DELIMITER ',' CSV HEADER;
 \copy photos FROM '/Users/jacobward/Downloads/reviews_photos.csv' DELIMITER ',' CSV HEADER;
-
 */

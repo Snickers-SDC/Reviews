@@ -22,17 +22,24 @@ const getQA = (id = 1) => {
 };
 
 const getReviewMetaData = (id = 1) => {
-  return axios.get(`${url}/reviews/${id}/meta`);
+  return axios.get(
+    // `${url}/reviews/${id}/meta`
+    `http://localhost:3000/reviews/meta?id=${id}`
+  );
 };
-
+// http://18.224.200.47/reviews/1/meta
 const getReviewsOfProduct = (id = 1, sortString = "relevant", count = 20) => {
   return axios.get(
-    `${url}/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
+    // `${url}/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
+    `http://localhost:3000/reviews/?id=${id}&sort=${sortString}&count=${count}`
   );
 };
 
 const reportReview = (reviewId) => {
-  return axios.put(`${url}/reviews/report/${reviewId}`);
+  return axios.put(
+    // `${url}/reviews/report/${reviewId}`
+    `http://localhost:3000/reviews/?id=${reviewId}`
+  );
 };
 
 const postReview = (
@@ -46,16 +53,19 @@ const postReview = (
   photos,
   characteristics
 ) => {
-  return axios.post(`${url}/reviews/${id}`, {
-    rating: rating,
-    summary: summary,
-    body: body,
-    recommend: recommend,
-    name: name,
-    email: email,
-    photos: photos,
-    characteristics: characteristics,
-  });
+  return axios.post(
+    // `${url}/reviews/${id}`,
+    `http://localhost:3000/reviews/${id}`,
+    {
+      rating: rating,
+      summary: summary,
+      body: body,
+      recommend: recommend,
+      name: name,
+      email: email,
+      photos: photos,
+      characteristics: characteristics,
+    });
 };
 
 const getCart = (userToken) => {

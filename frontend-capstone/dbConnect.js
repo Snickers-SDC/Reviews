@@ -1,20 +1,23 @@
-const { Pool } = require('pg')
-const dotenv = require('dotenv')
-const pool = new Pool({
-  user: process.env.USER,
+const { Pool } = require('pg');
+const dotenv = require('dotenv');
+
+dotenv.config();
+// console.log(process.env.USERR)
+
+const db = new Pool({
+  // host: 'localhost',
+  host: process.env.HOST,
+  // user: 'postgres',
+  user: process.env.USERR,
+  // password: '3863',
   password: process.env.PASSWORD,
+  // database: 'SDC',
   database: process.env.DATABASE,
+  // port: 5432,
   port: process.env.PORT,
 })
-pool.connect((err, client, release) => {
-  if (err) {
-    return console.error('Error acquiring client', err.stack)
-  }
-  client.query('SELECT NOW()', (err, result) => {
-    release()
-    if (err) {
-      return console.error('Error executing query', err.stack)
-    }
-    console.log(result.rows)
-  })
-})
+
+module.exports = {
+  db,
+}
+
